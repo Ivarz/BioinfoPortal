@@ -8,8 +8,9 @@ import org.biovars.bioinformaticsportal.analysis.request.details.AnalysisParamet
  * This record defines the type of analysis being performed and the reference
  * dataset to be used for transcriptomics workflows.
  *
- * @param type          the type of analysis being performed (e.g., transcriptomics)
- * @param starReference the STAR alignment reference to be used for the analysis
+ * @param type           the type of analysis being performed (e.g., transcriptomics)
+ * @param starReference  the STAR alignment reference to be used for the analysis
+ * @param rRnaEstimation Estimate rRNA percentage in reads
  */
 public record TranscriptomicAnalysisParameters(
     String type,
