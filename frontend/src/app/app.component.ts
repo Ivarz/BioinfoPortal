@@ -42,7 +42,9 @@ export class AppComponent implements OnInit {
           this.login();
         } else {
           this.oidcSecurityService.getPayloadFromAccessToken().subscribe(payload => {
-            this.isAdmin = payload['resource_access']['spa']['roles'].includes('portal-admin');
+            if (Object.hasOwn(payload, 'resource_access') && Object.hasOwn(payload['resource_access'], 'spa')) {
+              this.isAdmin = payload['resource_access']['spa']['roles'].includes('portal-admin');
+            }
           });
         }
       });
