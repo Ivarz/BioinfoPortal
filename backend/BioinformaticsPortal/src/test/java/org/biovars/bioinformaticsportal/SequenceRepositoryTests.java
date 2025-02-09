@@ -231,8 +231,8 @@ public class SequenceRepositoryTests {
                 "6",
                 "61",
                 "Orange",
-                "V00070609/L06/{run_id}_L0{lane}_61_1.fq.gz",
-                "V00070609/L06/{run_id}_L0{lane}_61_2.fq.gz"
+                "V00070609/L06/V00070609_L06_61_1.fq.gz",
+                "V00070609/L06/V00070609_L06_61_2.fq.gz"
         );
 
         var actualAttributes = Arrays.asList(rec.sampleId(),
@@ -273,16 +273,16 @@ public class SequenceRepositoryTests {
                     "9",
                     "61",
                     "Green",
-                    "V00092048/L09/{run_id}_L0{lane}_61_1.fq.gz",
-                    "V00092048/L09/{run_id}_L0{lane}_61_2.fq.gz"),
+                    "V00092048/L09/V00092048_L09_61_1.fq.gz",
+                    "V00092048/L09/V00092048_L09_61_2.fq.gz"),
                 Arrays.asList(
                         "WY4579",
                         "V00070609",
                         "6",
                         "61",
                         "Orange",
-                        "V00070609/L06/{run_id}_L0{lane}_61_1.fq.gz",
-                        "V00070609/L06/{run_id}_L0{lane}_61_2.fq.gz")
+                        "V00070609/L06/V00070609_L06_61_1.fq.gz",
+                        "V00070609/L06/V00070609_L06_61_2.fq.gz")
         );
 
         for (var i=0; i < result.size(); i++) {
@@ -317,24 +317,24 @@ public class SequenceRepositoryTests {
                         "3",
                         "38",
                         "Teal",
-                        "V00000002/L03/{run_id}_L0{lane}_38_1.fq.gz",
-                        "V00000002/L03/{run_id}_L0{lane}_38_2.fq.gz"),
+                        "V00000002/L03/V00000002_L03_38_1.fq.gz",
+                        "V00000002/L03/V00000002_L03_38_2.fq.gz"),
                 Arrays.asList(
                         "PK8899",
                         "V00092048",
                         "9",
                         "61",
                         "Green",
-                        "V00092048/L09/{run_id}_L0{lane}_61_1.fq.gz",
-                        "V00092048/L09/{run_id}_L0{lane}_61_2.fq.gz"),
+                        "V00092048/L09/V00092048_L09_61_1.fq.gz",
+                        "V00092048/L09/V00092048_L09_61_2.fq.gz"),
                 Arrays.asList(
                         "RV0001",
                         "V00000002",
                         "4",
                         "74",
                         "Orange",
-                        "V00000002/L04/{run_id}_L0{lane}_74_1.fq.gz",
-                        "V00000002/L04/{run_id}_L0{lane}_74_2.fq.gz")
+                        "V00000002/L04/V00000002_L04_74_1.fq.gz",
+                        "V00000002/L04/V00000002_L04_74_2.fq.gz")
         );
 
         for (var i=0; i < result.size(); i++) {

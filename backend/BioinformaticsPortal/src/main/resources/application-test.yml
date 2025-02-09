@@ -17,10 +17,10 @@ hpc:
 spring:
   datasource:
     portal:
-      url: jdbc:postgresql://localhost:7654/springboottest
-      username: springboottest
-      password: springboottest
+      url: jdbc:postgresql://localhost:8765/mydb
+      username: myuser
+      password: mypassword
     sequence:
-      url: jdbc:postgresql://localhost:7654/springboottest
-      username: springboottest
-      password: springboottest
+      url: jdbc:postgresql://localhost:8765/mydb
+      username: myuser
+      password: mypassword
