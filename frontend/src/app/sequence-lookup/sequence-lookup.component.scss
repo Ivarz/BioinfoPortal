@@ -1,0 +1,26 @@
+.missing-color {
+  background-color: #ffe8e8;
+}
+.found-color {
+  background-color: #e8f7ff;
+}
+.table-row {
+  height: 30px !important;
+}
+.input-fields {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.form-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.query-result-action-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}

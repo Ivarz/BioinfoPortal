@@ -1,0 +1,50 @@
+<h2 mat-dialog-title> {{ data.details.title }}</h2>
+<mat-dialog-content>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <strong>Analīzes ID:</strong>
+        </td>
+        <td>
+          {{ data.id }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Lietotāja ID:</strong>
+        </td>
+        <td>
+          {{ data.userId }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Analīzes Statuss:</strong>
+        </td>
+        <td>
+          {{ data.statusId }}
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>Analīzes Veids:</strong>
+        </td>
+        <td>
+          {{ data.details.analysisType }}
+        </td>
+      </tr>
+        @if (data.details.analysisType == 'metagenomics') {
+          <tr>
+            <td>
+              <strong>Saimniekorganisms:</strong>
+            </td>
+            <td>
+              {{ data.details.metagenomicAnalysisParameters.host }}
+            </td>
+          </tr>
+        }
+    </tbody>
+  </table>
+</mat-dialog-content>
+

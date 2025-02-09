@@ -1,0 +1,15 @@
+<form [formGroup]="analysisParameters">
+<mat-form-field>
+    <mat-label>Saimniekorganisms:</mat-label>
+    <mat-select required formControlName="host">
+      @for (host of hosts; track host.id) {
+        <mat-option [value]="host.id"> {{ host.displayName }} </mat-option>
+      }
+    </mat-select>
+</mat-form-field>
+
+  @for (classifier of taxonomicClassifiers; track classifier.id) {
+    <br>
+    <mat-checkbox formControlName="{{classifier.id}}">{{ classifier.displayName }} </mat-checkbox>
+  }
+</form>

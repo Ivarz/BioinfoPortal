@@ -1,0 +1,62 @@
+@if (loggedIn) {
+<mat-toolbar class="title-bar" color="accent">
+</mat-toolbar>
+
+<mat-sidenav-container autosize>
+
+  <mat-sidenav opened mode="side">
+    <mat-nav-list>
+
+      <div class="side-content">
+        <div class="side-content-menu-items">
+          <a routerLink="/sequence-lookup" mat-list-item>
+            <div class="menu-item-text">
+              <mat-icon>manage_search</mat-icon> Sekvenču meklēšana
+            </div>
+          </a>
+          <mat-divider></mat-divider>
+            <a routerLink="/submit-ngs-analysis" mat-list-item>
+              <div class="menu-item-text">
+                <mat-icon>genetics</mat-icon>
+                Jauna NGS analīze
+              </div>
+            </a>
+          <mat-divider></mat-divider>
+            <a routerLink="/analysis-results" mat-list-item>
+              <div class="menu-item-text">
+                <mat-icon>trending_up</mat-icon> Mani rezultāti
+              </div>
+            </a>
+          <mat-divider></mat-divider>
+          @if (isAdmin) {
+              <a routerLink="/hpc-resource-accounts" mat-list-item>
+                <div class="menu-item-text">
+              <mat-icon>manage_accounts</mat-icon> HPC resursu kontu pārvaldība
+                </div>
+              </a>
+            <mat-divider></mat-divider>
+          }
+            <a mat-list-item (click)="logout()">
+              <div class="menu-item-text">
+                <mat-icon>logout</mat-icon> Iziet
+              </div>
+            </a>
+        </div>
+
+        <!--<div>-->
+          <!--<button mat-flat-button (click)="logout()">Logout</button>-->
+        <!--</div>-->
+      </div>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="main-content">
+      <router-outlet />
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+}
+

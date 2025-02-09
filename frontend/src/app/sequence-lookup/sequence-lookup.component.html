@@ -1,0 +1,95 @@
+@if (lockPage) {
+<div class="center">
+<img src="maintenance.gif" width="500px"/>
+  <h2> Šobrīd tiek veikti datubāzes atjaunošanas darbi.</h2>
+  <h2> Pēc 30 minūtēm mēģiniet vēlreiz. </h2>
+</div>
+}
+<div class="form-layout">
+  @if (!lockPage) {
+  <form [formGroup]="sequenceLookupForm">
+    <p>
+      <mat-checkbox formControlName="fuzzySearch" >
+            Meklēt kā daļu no nosaukuma
+      </mat-checkbox>
+    </p>
+    <div class="input-fields">
+    <mat-form-field >
+      <mat-label>Sample IDs</mat-label>
+      <textarea formControlName="sampleIds" matInput placeholder="SM1234&#10;SM2345"></textarea>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>FC IDs</mat-label>
+      <textarea formControlName="runIds" matInput placeholder="V123456&#10;V234567"></textarea>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>Lanes</mat-label>
+      <textarea formControlName="lanes" matInput placeholder="1&#10;2"></textarea>
+    </mat-form-field>
+
+    <mat-form-field >
+      <mat-label>Types</mat-label>
+      <textarea formControlName="types" matInput placeholder="metagenomi&#10;metatranskriptomi&#10;-transkriptomi"></textarea>
+    </mat-form-field>
+    </div>
+  </form>
+  <br>
+  }
+
+
+
+  @if (!lockPage) {
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
+        <ng-container matColumnDef="sampleId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Sample ID</th>
+          <td mat-cell *matCellDef="let sequence">{{ sequence.sampleId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="runId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>FC ID</th>
+          <td mat-cell *matCellDef="let sequence">{{ sequence.runId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lane">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Lane</th>
+          <td mat-cell *matCellDef="let sequence">{{ sequence.lane }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="barcode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Barcode</th>
+          <td mat-cell *matCellDef="let sequence">{{ sequence.barcode }}</td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+          <td mat-cell *matCellDef="let sequence">{{ sequence.type }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="mate1">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Mate1</th>
+          <td mat-cell *matCellDef="let sequence">{{ sequence.mate1 }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [class.missing-color]="row['runId'] === null" [class.found-color]="row['runId'] !== null " class="table-row"></tr>
+
+    </table>
+    <mat-paginator #searchPaginator [pageSizeOptions]="[5, 10, 20, 50, 100]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+    </mat-paginator>
+
+  <mat-divider></mat-divider>
+
+    <div class="query-result-action-buttons">
+      <button mat-flat-button type="button" mat-raised-button (click)="onRedirectToNgsAnalysisSubmission()" [disabled]="!showResultsTable">Izveidot analīzes pieprasījumu</button>
+
+      <a [href]="fileUrl" download="searchResults.txt">
+        <button mat-flat-button type="button" mat-raised-button [disabled]="!showResultsTable">Lejuplādēt vaicājuma rezultātus</button>
+      </a>
+    </div>
+  }

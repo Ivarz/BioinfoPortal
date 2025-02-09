@@ -1,0 +1,16 @@
+<form [formGroup]="analysisParameters">
+
+
+<mat-form-field>
+    <mat-label>References genoms:</mat-label>
+    <mat-select required formControlName="starReference">
+      @for (starRef of starReferences; track starRef.id) {
+        <mat-option [value]="starRef.id"> {{ starRef.displayName }} </mat-option>
+      }
+    </mat-select>
+</mat-form-field>
+
+  <br>
+  <mat-checkbox [checked]="false" formControlName=rRnaEstimation >Noteikt rRNS daudzumu</mat-checkbox>
+  <br>
+</form>

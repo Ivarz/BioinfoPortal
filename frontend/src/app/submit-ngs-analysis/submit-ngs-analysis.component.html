@@ -1,0 +1,140 @@
+@if (lockPage) {
+<div class="center">
+<img src="maintenance.gif" width="500px"/>
+  <h2> Šobrīd tiek veikti datubāzes atjaunošanas darbi.</h2>
+  <h2> Pēc 30 minūtēm mēģiniet vēlreiz. </h2>
+</div>
+} @else {
+<form [formGroup]="ngsForm">
+
+  <mat-form-field>
+    <mat-label>Analīzes nosaukums</mat-label>
+    <input formControlName="title" required  matInput placeholder="analize-1234">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>HPC resursu konts</mat-label>
+    <mat-select [panelWidth]="null" formControlName="hpcAccount" required>
+      @for (acc of (accounts$ | async); track acc.name) {
+        <mat-option [value]="acc.name">{{acc.name}} ({{acc.balance}} EUR)</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>Analīzes veids</mat-label>
+    <mat-select formControlName="analysisType" required>
+      @for (atype of (analysisTypes); track atype.id) {
+        <mat-option [value]="atype.id">{{atype.displayValue}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-checkbox [checked]="false" formControlName=keepHpcFiles >Saglabāt analīzes failus HPC</mat-checkbox>
+  <br>
+
+</form>
+  <br>
+
+@if ( ngsForm.value.analysisType == 'metagenomics' ) {
+  <p>
+    <app-metagenomics [analysisParameters]="ngsForm['controls'].analysisParameters" />
+  </p>
+}
+
+@if ( ngsForm.value.analysisType == 'metatranscriptomics' ) {
+  <p>
+    <app-metatranscriptomics [analysisParameters]="ngsForm['controls'].analysisParameters" />
+  </p>
+}
+
+@if ( ngsForm.value.analysisType == 'transcriptomics' ) {
+  <p>
+    <app-transcriptomics [analysisParameters]="ngsForm['controls'].analysisParameters" />
+  </p>
+}
+
+  <button mat-flat-button type="button" mat-raised-button (click)="fileInput.click()">Paraugu saraksts</button>
+    <input hidden type="file" #fileInput (change)="onFileChange($event)" />
+    <!--<button (click)="onUpload()">Upload</button>-->
+  <br>
+@if (showTable) {
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="sampleId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sample ID</th>
+        <td mat-cell *matCellDef="let sequence">{{ sequence['first'].sampleId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="runId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>FC ID</th>
+        <td mat-cell *matCellDef="let sequence">{{ sequence['first'].runId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="lane">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Lane</th>
+        <td mat-cell *matCellDef="let sequence">{{ sequence['first'].lane }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="barcode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Barcode</th>
+        <td mat-cell *matCellDef="let sequence">{{ sequence['first'].barcode }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+        <td mat-cell *matCellDef="let sequence">{{ sequence['first'].type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="mate1">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mate1</th>
+        <td mat-cell *matCellDef="let sequence">{{ sequence['first'].mate1 }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="mate2">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mate2</th>
+        <td mat-cell *matCellDef="let sequence">{{ sequence['first'].mate2 }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+      <tr mat-row *matRowDef="let sequence; columns: displayedColumns;" [class.missing-color]="!sequence['second']" [class.found-color]="sequence['second']" class="table-row"></tr>
+
+  </table>
+
+
+  <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]"
+               showFirstLastButtons
+               aria-label="Select page of periodic elements">
+  </mat-paginator>
+
+  <!--<a [href]="fileUrl" download="submittedSamples.txt">-->
+    <!--<button mat-flat-button type="button" mat-raised-button> Lejuplādēt paraugu sarakstu </button>-->
+  <!--</a>-->
+}
+
+
+<p>
+  <button mat-flat-button type="button" mat-raised-button (click)="onSubmitAnalysis()" [disabled]="!ngsForm.valid || sequencesToAnalyse.length === 0" > Veikt analīzi </button>
+</p>
+}
+
+  <!--@if ( ngsForm.value.hpcAccount ) {-->
+    <!--Selected values: {{ ngsForm.value.hpcAccount }}-->
+    <!--Analysis Type: {{ ngsForm.value.analysisType }}-->
+  <!--}-->
+
+  <!--<br>-->
+  <!--@if ( ngsForm['controls'].metagenomicsAnalysisDetails.value.host ) {-->
+    <!--Taxonomic Classification (from parent comp.): {{ ngsForm['controls'].metagenomicsAnalysisDetails.value.host }}-->
+  <!--}-->
+  <!--<br>-->
+    <!--Taxonomic Classification (from parent comp.): {{ ngsForm['controls'].metagenomicsAnalysisDetails.value.kraken2_uhgg }}-->
+
+<!--<p>-->
+  <!--{{ formAsJson }}-->
+<!--</p>-->

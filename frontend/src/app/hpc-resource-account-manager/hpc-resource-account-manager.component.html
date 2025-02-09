@@ -1,0 +1,28 @@
+<table>
+@for (role of realmRoles; track role) {
+  <tr>
+  <td> {{ role }} </td>
+  <td>
+  <mat-form-field  [formGroup]="mappedAccounts">
+    <mat-label>{{ role }} konti</mat-label>
+      <mat-select [panelWidth]="null" [compareWith]="compareFunction" formControlName="{{ role }}" multiple>
+      @for (acc of hpcAccounts; track acc.name) {
+          <mat-option [value]="acc">{{acc.name}}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+  </td>
+    <td>
+      <ul>
+      @for (obj of mappedAccounts.get(role)?.value; track obj.name) {
+        <li>{{ obj.name }}</li>
+      }
+      </ul>
+    </td>
+  </tr>
+}
+</table>
+
+<!--<p>-->
+  <!--<button mat-flat-button type="button" mat-raised-button (click)="onSubmitRoleMapping()"> Saglabāt </button>-->
+<!--</p>-->

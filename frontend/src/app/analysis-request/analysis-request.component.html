@@ -1,0 +1,111 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort >
+
+    <ng-container matColumnDef="analysisTitle">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nosaukums</th>
+      <td mat-cell *matCellDef="let analysisRequest">{{ analysisRequest.details.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="analysisType">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Veids</th>
+      <td mat-cell *matCellDef="let analysisRequest">{{ analysisRequest.details.analysisType }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="hpcAccount">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>HPC konts</th>
+      <td mat-cell *matCellDef="let analysisRequest">{{ analysisRequest.details.hpcAccount }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="analysisStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Statuss</th>
+      <td mat-cell *matCellDef="let analysisRequest">{{ statusIdDisplayValues[analysisRequest.statusId] }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="downloadResults">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+    <td mat-cell *matCellDef="let analysisRequest">
+      <button button mat-flat-button [disabled]="!analysisRequest.fulfilled" type="button" mat-raised-button (click)="downloadAll(analysisRequest)">Lejuplādēt rezultātus</button>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deleteResults">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+    <td mat-cell *matCellDef="let analysisRequest">
+      <button button mat-flat-button [disabled]="!analysisRequest.fulfilled" type="button" mat-raised-button (click)="deleteAnalysis(analysisRequest)">Dzēst analīzi</button>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="resumeAnalysis">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+    <td mat-cell *matCellDef="let analysisRequest">
+      <button button mat-flat-button [disabled]="!analysisRequest.failed" type="button" mat-raised-button (click)="resumeAnalysis(analysisRequest)">Turpināt analīzi</button>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="analysisInfo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+    <td mat-cell *matCellDef="let analysisRequest">
+      <button button mat-flat-button type="button" mat-raised-button (click)="showAnalysisInfo(analysisRequest)">Info</button>
+    </td>
+    </ng-container>
+
+    <!--<ng-container matColumnDef="runId">-->
+      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>FC ID</th>-->
+      <!--<td mat-cell *matCellDef="let sequence">{{ sequence.runId }}</td>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="lane">-->
+      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>Lane</th>-->
+      <!--<td mat-cell *matCellDef="let sequence">{{ sequence.lane }}</td>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="barcode">-->
+      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>Barcode</th>-->
+      <!--<td mat-cell *matCellDef="let sequence">{{ sequence.barcode }}</td>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="type">-->
+      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>-->
+      <!--<td mat-cell *matCellDef="let sequence">{{ sequence.type }}</td>-->
+    <!--</ng-container>-->
+
+    <!--<ng-container matColumnDef="mate1">-->
+      <!--<th mat-header-cell *matHeaderCellDef mat-sort-header>Mate1</th>-->
+      <!--<td mat-cell *matCellDef="let sequence">{{ sequence.mate1 }}</td>-->
+    <!--</ng-container>-->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+
+<br>
+
+<!--<button button mat-flat-button type="button" mat-raised-button (click)="deleteDummyAnalysis()">Nosūtīt dzēšanas msg</button>-->
+<!--<br>-->
+
+<!--<mat-paginator #searchPaginator [pageSizeOptions]="[5, 10, 20]"-->
+             <!--showFirstLastButtons-->
+             <!--aria-label="Select page of periodic elements">-->
+<!--</mat-paginator>-->
+
+<!--<mat-accordion>-->
+<!--@for (aReq of currentUsersAnalysisRequests; track aReq.id) {-->
+  <!--<mat-expansion-panel hideToggle>-->
+    <!--<mat-expansion-panel-header>-->
+      <!--<mat-panel-title> {{ aReq.details.title }} </mat-panel-title>-->
+      <!--<mat-panel-description> This is a summary of the content </mat-panel-description>-->
+    <!--</mat-expansion-panel-header>-->
+
+    <!--<ul>-->
+      <!--@for (fileObj of (fileList$[aReq.id.toString()] | async); track fileObj.fileName) {-->
+      <!--<li> {{ fileObj.fileName }} </li>-->
+      <!--}-->
+    <!--</ul>-->
+    <!--<button button mat-flat-button type="button" mat-raised-button (click)="downloadAll(aReq)">Lejuplādēt analīzes rezultātus</button>-->
+
+    <!--[><button<]-->
+
+  <!--</mat-expansion-panel>-->
+  <!--}-->
+<!--</mat-accordion>-->
+
