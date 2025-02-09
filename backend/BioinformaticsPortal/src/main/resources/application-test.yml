@@ -1,0 +1,26 @@
+keySetURI: http://localhost:8081/realms/bioinfoportal/protocol/openid-connect/certs
+frontendOrigin: http://localhost:4200
+apiKey: my-api-key
+logging:
+  level:
+    root: INFO
+minio:
+  url: http://localhost:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucket: analysis-results
+hpc:
+  host: '***************'
+  user: '***************'
+  key: '*******************************'
+  port: 22
+spring:
+  datasource:
+    portal:
+      url: jdbc:postgresql://localhost:7654/springboottest
+      username: springboottest
+      password: springboottest
+    sequence:
+      url: jdbc:postgresql://localhost:7654/springboottest
+      username: springboottest
+      password: springboottest

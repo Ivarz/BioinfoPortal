@@ -1,0 +1,41 @@
+keySetURI: http://localhost:8081/realms/bioinfoportal/protocol/openid-connect/certs
+frontendOrigin: http://localhost:4200
+apiKey: my-api-key
+logging:
+  level:
+    root: INFO
+    org:
+      jboss:
+        resteasy=DEBUG:
+minio:
+  url: http://localhost:9000
+  accessKey: minioadmin
+  secretKey: minioadmin
+  bucket: analysis-results
+keycloak:
+  authServerUrl: http://localhost:8081
+  portalRealm: bioinfoportal
+  masterRealm: master
+  clientId: 940ed264-651b-4508-b216-fc88172c295b
+  adminUsername: admin
+  adminPassword: admin
+rabbit:
+  analysisQueue: analysisQueue
+hpc:
+  host: '***************'
+  user: '***************'
+  key: '*******************************'
+  port: 22
+spring:
+  sql:
+    init:
+      mode: never
+  datasource:
+    portal:
+      url: jdbc:postgresql://localhost:7654/springboot
+      username: springboot
+      password: springboot
+    sequence:
+      url: jdbc:postgresql://localhost:6543/sequence_database
+      username: username
+      password: pass
