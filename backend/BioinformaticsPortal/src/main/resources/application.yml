@@ -32,10 +32,10 @@ spring:
       mode: never
   datasource:
     portal:
-      url: jdbc:postgresql://localhost:7654/springboot
-      username: springboot
-      password: springboot
+      url: jdbc:postgresql://localhost:8765/mydb
+      username: myuser
+      password: mypassword
     sequence:
-      url: jdbc:postgresql://localhost:6543/sequence_database
-      username: username
-      password: pass
+      url: jdbc:postgresql://localhost:8765/mydb
+      username: myuser
+      password: mypassword
